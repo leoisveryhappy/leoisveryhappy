@@ -60,7 +60,7 @@ def clear_screen():
 
 # sets locations of all the tile-types
 def get_locations():
-    return random.sample(CELLS, 15)
+    return random.sample(CELLS, 16)
 
 
 # for creating the map
@@ -76,7 +76,34 @@ def set_grid(SIZE):
             y += 1
             continue
         x += 1
-def draw_map(monster1, monster2, monster3, potato_farm, mysterious1, mysterious2, shop1, casino1, chest1, chest2, chest3, berries1, berries2, berries3, player, SIZE):
+def draw_map2(monster1, monster2, monster3, shop1, player, SIZE):
+    print((Fore.WHITE+" _"+Style.RESET_ALL)*(SIZE+1))
+    tile = Fore.WHITE+"|"+Style.RESET_ALL+"{}"
+    for cell in CELLS:
+        x, y = cell
+        if x < SIZE:
+            line_end = ""
+            if cell == player:
+                output = tile.format(Fore.GREEN+"X"+Style.RESET_ALL)
+            elif (cell == monster1) or (cell == monster2) or (cell == monster3):
+                output = tile.format(Fore.RED+"M"+Style.RESET_ALL)
+            elif (cell == shop1):
+                output = tile.format(Fore.LIGHTYELLOW_EX+"S"+Style.RESET_ALL)
+        else:
+            line_end = "\n"
+            if cell == player:
+                output = tile.format(Fore.GREEN+"X"+Fore.YELLOW+"|"+Style.RESET_ALL)
+            elif (cell == monster1) or (cell == monster2) or (cell == monster3):
+                output = tile.format(Fore.RED+"M"+Style.RESET_ALL)
+            elif (cell == shop1):
+                output = tile.format(Fore.LIGHTYELLOW_EX+"S"+Style.RESET_ALL)
+            print(output, end=line_end)
+        print("-"*2*SIZE+"---")
+
+            
+            
+
+def draw_map(portal1, monster1, monster2, monster3, potato_farm, mysterious1, mysterious2, shop1, casino1, chest1, chest2, chest3, berries1, berries2, berries3, player, SIZE):
     # list_of_letters = [" A", " B", " C", " D", " E", " F", " G", " H", " I", " J", " K", " L", " M", " N", " O", " P", " Q", " R", " S", " T", " U", " V" ," W", " X", " Y", " Z"]
     # print(Fore.YELLOW+" A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"+Style.RESET_ALL)
     print((Fore.YELLOW+" _"+Style.RESET_ALL)*(SIZE+1))
@@ -87,6 +114,8 @@ def draw_map(monster1, monster2, monster3, potato_farm, mysterious1, mysterious2
             line_end = ""
             if cell == player:
                 output = tile.format(Fore.GREEN+"X"+Style.RESET_ALL)
+            elif (cell == portal1):
+                output = tile.format(Fore.WHITE+"P"+Style.RESET_ALL)
             elif (cell == berries1) or (cell == berries2) or (cell == berries3):
                 output = tile.format(Fore.BLUE+"+"+Style.RESET_ALL)
             elif (cell == chest1) or (cell == chest2) or (cell == chest3):
@@ -105,6 +134,8 @@ def draw_map(monster1, monster2, monster3, potato_farm, mysterious1, mysterious2
             line_end = "\n"
             if cell == player:
                 output = tile.format(Fore.GREEN+"X"+Fore.YELLOW+"|"+Style.RESET_ALL)
+            elif (cell == portal1):
+                output = tile.format(Fore.WHITE+"P"+Style.RESET_ALL)
             elif (cell == berries1) or (cell == berries2) or (cell == berries3):
                 output = tile.format(Fore.BLUE+"+"+Fore.YELLOW+"|"+Style.RESET_ALL)
             elif (cell == chest1) or (cell == chest2) or (cell == chest3):
@@ -617,6 +648,8 @@ def game_loop():
     items_in_chest3 = random.sample(foods, 2)
     items_in_chest3.append(random.choice(clothes))
     
+    
+    
     # generate random mysterious events for the mysterious tiles
     generate_mysterious_event = ["gold", "dead body", "ambush"]
     mysterious1_event, mysterious2_event = random.sample(generate_mysterious_event, 2)
@@ -630,7 +663,7 @@ def game_loop():
     default_message = Fore.BLACK + ("-"*2*SIZE+"---") + Style.RESET_ALL
 
     # spawn the things
-    monster1_spawn, monster2_spawn, monster3_spawn, potato_farm, mysterious1, mysterious2, shop1, casino1, chest1, chest2, chest3, berries1, berries2, berries3, player = get_locations()
+    portal1, monster1_spawn, monster2_spawn, monster3_spawn, potato_farm, mysterious1, mysterious2, shop1, casino1, chest1, chest2, chest3, berries1, berries2, berries3, player = get_locations()
     monster1 = monster1_spawn
     monster1_respawn = -1
     monster2 = monster2_spawn
@@ -638,6 +671,8 @@ def game_loop():
     monster3 = monster3_spawn
     monster3_respawn = -1
 
+    # portal
+    
     while playing:
         if (monster1 == None) and monster1_respawn == turn:
             monster1 = monster1_spawn
@@ -647,6 +682,7 @@ def game_loop():
             monster3 = monster3_spawn
         clear_screen()
         draw_map(
+            portal1,
             monster1, monster2, monster3,
             potato_farm, 
             mysterious1, mysterious2,
@@ -711,6 +747,7 @@ def game_loop():
             while True:
                 clear_screen()
                 draw_map(
+                    portal1,
                     monster1, monster2, monster3,
                     potato_farm,
                     mysterious1, mysterious2,
@@ -743,6 +780,7 @@ def game_loop():
             while True:
                 clear_screen()
                 draw_map(
+                    portal1,
                     monster1, monster2, monster3,
                     potato_farm, mysterious1, mysterious2,
                     shop1,
@@ -824,7 +862,6 @@ def game_loop():
                     berries3 = None
                 message = Fore.BLUE + "You ate some berries, +15 hunger." + Style.RESET_ALL
 
-
         #
         # chest and inventory management area
         #
@@ -833,6 +870,7 @@ def game_loop():
                 while True:
                     clear_screen()
                     draw_map(
+                        portal1,
                         monster1, monster2, monster3,
                         potato_farm, mysterious1, mysterious2,
                         shop1,
@@ -884,6 +922,7 @@ def game_loop():
                 while True:
                     clear_screen()
                     draw_map(
+                        portal1,
                         monster1, monster2, monster3,
                         potato_farm, mysterious1, mysterious2,
                         shop1,
@@ -935,6 +974,7 @@ def game_loop():
                 while True:
                     clear_screen()
                     draw_map(
+                        portal1,
                         monster1, monster2, monster3,
                         potato_farm, mysterious1, mysterious2,
                         shop1,
@@ -986,6 +1026,8 @@ def game_loop():
         #
         # shop area
         #
+          
+
             if (player == shop1):
                 message = Fore.GREEN+"You entered the shop!"+Style.RESET_ALL
                 while True:
@@ -1752,6 +1794,7 @@ def game_loop():
                 message = Fore.GREEN+"You spot a small potato farm."+Style.RESET_ALL
                 clear_screen()
                 draw_map(
+                    portal1,
                     monster1, monster2, monster3,
                     potato_farm, mysterious1, mysterious2,
                     shop1,
@@ -2173,7 +2216,33 @@ def game_loop():
                         message = Fore.RED + "The monster claws you. -{} health, -{} armour.".format(monster_damage, original_armour - armour) + Style.RESET_ALL
                         # exit monsters turn
                         break
-
+        # portal
+            if (player == portal1):
+                print("You found a portal.")
+                while True:
+                    clear_screen()
+                    draw_map(
+                        portal1,
+                        monster1, monster2, monster3,
+                        potato_farm, mysterious1, mysterious2,
+                        shop1,
+                        casino1,
+                        chest1, chest2, chest3,
+                        berries1, berries2, berries3,
+                        player,
+                        SIZE)
+                    print_UI(turn, health, hunger, armour, gold)
+                    return_message(message, SIZE)
+                    print("Portal:")
+                    print("Would you like to go through the portal? You cannot come back to this stage. y/n")    
+                    confirm_teleport = input("(y/n)\n> ").lower()
+                    if confirm_teleport == "y":
+                        message = Fore.MAGENTA+"You went through the portal!"+Style.RESET_ALL
+                        portal1, monster1_spawn, monster2_spawn, monster3_spawn, potato_farm, mysterious1, mysterious2, shop1, casino1, chest1, chest2, chest3, berries1, berries2, berries3, player = get_locations()
+                        break
+                    else:
+                        message = Fore.RED+"You did not go through the portal."+Style.RESET_ALL
+                        break
 
         #
         # death management area

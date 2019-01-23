@@ -4,7 +4,6 @@ import time
 import colorama
 from colorama import Fore, Back, Style
 
-
 #
 # add monsters
 #
@@ -49,6 +48,7 @@ from colorama import Fore, Back, Style
 #
 
 
+
 # the list that the draw_map funcion is based off of
 CELLS = []
 
@@ -76,44 +76,18 @@ def set_grid(SIZE):
             y += 1
             continue
         x += 1
-def draw_map2(monster1, monster2, monster3, shop1, player, SIZE):
-    print((Fore.WHITE+" _"+Style.RESET_ALL)*(SIZE+1))
-    tile = Fore.WHITE+"|"+Style.RESET_ALL+"{}"
-    for cell in CELLS:
-        x, y = cell
-        if x < SIZE:
-            line_end = ""
-            if cell == player:
-                output = tile.format(Fore.GREEN+"X"+Style.RESET_ALL)
-            elif (cell == monster1) or (cell == monster2) or (cell == monster3):
-                output = tile.format(Fore.RED+"M"+Style.RESET_ALL)
-            elif (cell == shop1):
-                output = tile.format(Fore.LIGHTYELLOW_EX+"S"+Style.RESET_ALL)
-        else:
-            line_end = "\n"
-            if cell == player:
-                output = tile.format(Fore.GREEN+"X"+Fore.YELLOW+"|"+Style.RESET_ALL)
-            elif (cell == monster1) or (cell == monster2) or (cell == monster3):
-                output = tile.format(Fore.RED+"M"+Style.RESET_ALL)
-            elif (cell == shop1):
-                output = tile.format(Fore.LIGHTYELLOW_EX+"S"+Style.RESET_ALL)
-            print(output, end=line_end)
-        print("-"*2*SIZE+"---")
 
-            
-            
-
-def draw_map(portal1, monster1, monster2, monster3, potato_farm, mysterious1, mysterious2, shop1, casino1, chest1, chest2, chest3, berries1, berries2, berries3, player, SIZE):
+def draw_map2(portal1, monster1, monster2, monster3, potato_farm, mysterious1, mysterious2, shop1, casino1, chest1, chest2, chest3, berries1, berries2, berries3, player, SIZE):
     # list_of_letters = [" A", " B", " C", " D", " E", " F", " G", " H", " I", " J", " K", " L", " M", " N", " O", " P", " Q", " R", " S", " T", " U", " V" ," W", " X", " Y", " Z"]
     # print(Fore.YELLOW+" A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"+Style.RESET_ALL)
     print((Fore.YELLOW+" _"+Style.RESET_ALL)*(SIZE+1))
-    tile = Fore.YELLOW+"|"+Style.RESET_ALL+"{}"
+    tile = Fore.BLACK+"|"+Style.RESET_ALL+"{}"
     for cell in CELLS:
         x, y = cell
         if x < SIZE:
             line_end = ""
             if cell == player:
-                output = tile.format(Fore.GREEN+"X"+Style.RESET_ALL)
+                output = tile.format(Fore.WHITE+"X"+Style.RESET_ALL)
             elif (cell == portal1):
                 output = tile.format(Fore.WHITE+"P"+Style.RESET_ALL)
             elif (cell == berries1) or (cell == berries2) or (cell == berries3):
@@ -129,29 +103,80 @@ def draw_map(portal1, monster1, monster2, monster3, potato_farm, mysterious1, my
             elif (cell == monster1) or (cell == monster2) or (cell == monster3):
                 output = tile.format(Fore.RED+"M"+Style.RESET_ALL)
             else:
-                output = tile.format(Fore.YELLOW+"_"+Style.RESET_ALL)
+                output = tile.format(Fore.LIGHTWHITE_EX+"-"+Style.RESET_ALL)
         else:
             line_end = "\n"
             if cell == player:
-                output = tile.format(Fore.GREEN+"X"+Fore.YELLOW+"|"+Style.RESET_ALL)
+                output = tile.format(Fore.WHITE+"X"+Fore.BLACK+"|"+Style.RESET_ALL)
             elif (cell == portal1):
                 output = tile.format(Fore.WHITE+"P"+Style.RESET_ALL)
             elif (cell == berries1) or (cell == berries2) or (cell == berries3):
-                output = tile.format(Fore.BLUE+"+"+Fore.YELLOW+"|"+Style.RESET_ALL)
+                output = tile.format(Fore.BLUE+"+"+Fore.BLACK+"|"+Style.RESET_ALL)
             elif (cell == chest1) or (cell == chest2) or (cell == chest3):
-                output = tile.format(Fore.CYAN+"C"+Fore.YELLOW+"|"+Style.RESET_ALL)
+                output = tile.format(Fore.CYAN+"C"+Fore.BLACK+"|"+Style.RESET_ALL)
             elif (cell == shop1):
-                output = tile.format(Fore.LIGHTYELLOW_EX+"S"+Fore.YELLOW+"|"+Style.RESET_ALL)
+                output = tile.format(Fore.LIGHTYELLOW_EX+"S"+Fore.BLACK+"|"+Style.RESET_ALL)
             elif (cell == casino1):
-                output = tile.format(Fore.LIGHTYELLOW_EX+"$"+Fore.YELLOW+"|"+Style.RESET_ALL)
+                output = tile.format(Fore.LIGHTYELLOW_EX+"$"+Fore.BLACK+"|"+Style.RESET_ALL)
             elif (cell == potato_farm):
-                output = tile.format(Fore.LIGHTMAGENTA_EX+"?"+Fore.YELLOW+"|"+Style.RESET_ALL)
+                output = tile.format(Fore.LIGHTMAGENTA_EX+"?"+Fore.BLACK+"|"+Style.RESET_ALL)
             elif (cell == monster1) or (cell == monster2) or (cell == monster3):
-                output = tile.format(Fore.RED+"M"+Fore.YELLOW+"|"+Style.RESET_ALL)
+                output = tile.format(Fore.RED+"M"+Fore.BLACK+"|"+Style.RESET_ALL)
             else:
-                output = tile.format(Fore.YELLOW+"_|"+Style.RESET_ALL)
+                output = tile.format(Fore.LIGHTWHITE_EX+"-"+Fore.BLACK+"|"+Style.RESET_ALL)
+        print(output, end=line_end)
+    print("-"*2*SIZE+"---")         
+
+def draw_map(portal1, monster1, monster2, monster3, potato_farm, mysterious1, mysterious2, shop1, casino1, chest1, chest2, chest3, berries1, berries2, berries3, player, SIZE):
+    # list_of_letters = [" A", " B", " C", " D", " E", " F", " G", " H", " I", " J", " K", " L", " M", " N", " O", " P", " Q", " R", " S", " T", " U", " V" ," W", " X", " Y", " Z"]
+    # print(Fore.YELLOW+" A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"+Style.RESET_ALL)
+    print((Fore.BLACK+" _"+Style.RESET_ALL)*(SIZE+1))
+    tile = Fore.BLACK+"|"+Style.RESET_ALL+"{}"
+    for cell in CELLS:
+        x, y = cell
+        if x < SIZE:
+            line_end = ""
+            if cell == player:
+                output = tile.format(Fore.WHITE+"X"+Style.RESET_ALL)
+            elif (cell == portal1):
+                output = tile.format(Fore.WHITE+"P"+Style.RESET_ALL)
+            elif (cell == berries1) or (cell == berries2) or (cell == berries3):
+                output = tile.format(Fore.BLUE+"+"+Style.RESET_ALL)
+            elif (cell == chest1) or (cell == chest2) or (cell == chest3):
+                output = tile.format(Fore.CYAN+"C"+Style.RESET_ALL)
+            elif (cell == shop1):
+                output = tile.format(Fore.LIGHTYELLOW_EX+"S"+Style.RESET_ALL)
+            elif (cell == casino1):
+                output = tile.format(Fore.LIGHTYELLOW_EX+"$"+Style.RESET_ALL)
+            elif (cell == potato_farm) or (cell == mysterious1) or (cell == mysterious2):
+                output = tile.format(Fore.LIGHTMAGENTA_EX+"?"+Style.RESET_ALL)
+            elif (cell == monster1) or (cell == monster2) or (cell == monster3):
+                output = tile.format(Fore.RED+"M"+Style.RESET_ALL)
+            else:
+                output = tile.format(Fore.LIGHTBLACK_EX+"-"+Style.RESET_ALL)
+        else:
+            line_end = "\n"
+            if cell == player:
+                output = tile.format(Fore.WHITE+"X"+Fore.BLACK+"|"+Style.RESET_ALL)
+            elif (cell == portal1):
+                output = tile.format(Fore.WHITE+"P"+Style.RESET_ALL)
+            elif (cell == berries1) or (cell == berries2) or (cell == berries3):
+                output = tile.format(Fore.BLUE+"+"+Fore.BLACK+"|"+Style.RESET_ALL)
+            elif (cell == chest1) or (cell == chest2) or (cell == chest3):
+                output = tile.format(Fore.CYAN+"C"+Fore.BLACK+"|"+Style.RESET_ALL)
+            elif (cell == shop1):
+                output = tile.format(Fore.LIGHTYELLOW_EX+"S"+Fore.BLACK+"|"+Style.RESET_ALL)
+            elif (cell == casino1):
+                output = tile.format(Fore.LIGHTYELLOW_EX+"$"+Fore.BLACK+"|"+Style.RESET_ALL)
+            elif (cell == potato_farm):
+                output = tile.format(Fore.LIGHTMAGENTA_EX+"?"+Fore.BLACK+"|"+Style.RESET_ALL)
+            elif (cell == monster1) or (cell == monster2) or (cell == monster3):
+                output = tile.format(Fore.RED+"M"+Fore.BLACK+"|"+Style.RESET_ALL)
+            else:
+                output = tile.format(Fore.LIGHTBLACK_EX+"-"+Fore.BLACK+"|"+Style.RESET_ALL)
         print(output, end=line_end)
     print("-"*2*SIZE+"---")
+
 
 
 # for moving the player
@@ -647,6 +672,11 @@ def game_loop():
     items_in_chest2.append(random.choice(clothes))
     items_in_chest3 = random.sample(foods, 2)
     items_in_chest3.append(random.choice(clothes))
+
+    if len(items_in_chest1) == 0:
+        print(Fore.RED+"Empty"+Style.RESET_ALL)
+        
+
     
     
     
@@ -723,6 +753,7 @@ def game_loop():
             print("C = chest")
             print("S = shop")
             print("M = monster")
+            print("P = portal")
             print("-"*2*SIZE+"---")
             print("Controls:")
             print("- 'N' or 'n' to travel north")
@@ -776,6 +807,33 @@ def game_loop():
                         message = (Fore.BLUE+"You wore the {}.".format(wear)+Style.RESET_ALL)
                     else:
                         message = (Fore.RED+"You can not wear '{}'.".format(wear)+Style.RESET_ALL)
+        elif move == "CHEAT1234":
+            while True:
+                clear_screen()
+                draw_map(
+                    portal1,
+                    monster1, monster2, monster3,
+                    potato_farm, mysterious1, mysterious2,
+                    shop1,
+                    casino1,
+                    chest1, chest2, chest3,
+                    berries1, berries2, berries3,
+                    player,
+                    SIZE)
+                print_UI(turn, health, hunger, armour, gold)
+                print_inventory(inventory)
+                return_message(message, SIZE)
+                print("You have entered a cheat code")
+                confirm_cheat = print("Would you like to activate it? y/n.")
+                if confirm_cheat == "y":
+                    while True:
+                        health = max_health
+                        hunger = max_hunger
+                        armour = max_armour
+                        gold += 10000
+                else:
+                    break
+
         elif move == "EAT":
             while True:
                 clear_screen()
@@ -799,7 +857,7 @@ def game_loop():
                 if eat == "Exit":
                     break
                 for item in inventory:
-                    if eat == item.get("name") and item.get("type") == "food":
+                    if eat == item.get("name") and item.get("type") == "food" or "magic":
                         add_hunger = item.get("effect")
                         hunger += add_hunger
                         if hunger > max_hunger:
@@ -882,10 +940,14 @@ def game_loop():
                     print_UI(turn, health, hunger, armour, gold)
                     return_message(message, SIZE)
 
+
+
                     # show items in the chest
+                
                     print("Chest:")
                     if len(items_in_chest1) == 0:
                         print(Fore.RED+"Empty"+Style.RESET_ALL)
+                        break
                     for item in items_in_chest1:
                         print("- "+item.get("name"))
 
@@ -893,7 +955,6 @@ def game_loop():
                     get_item = input("> ")
                     if get_item.lower() == "exit":
                         message = default_message
-                        break
 
                     # print current inventory
                     elif get_item.lower() == "i":
@@ -2239,6 +2300,7 @@ def game_loop():
                     if confirm_teleport == "y":
                         message = Fore.MAGENTA+"You went through the portal!"+Style.RESET_ALL
                         portal1, monster1_spawn, monster2_spawn, monster3_spawn, potato_farm, mysterious1, mysterious2, shop1, casino1, chest1, chest2, chest3, berries1, berries2, berries3, player = get_locations()
+                        
                         break
                     else:
                         message = Fore.RED+"You did not go through the portal."+Style.RESET_ALL
